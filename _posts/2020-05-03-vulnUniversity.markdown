@@ -78,4 +78,4 @@ Here is an example
 
 
 and another example
-<img src="{{ base.url }}/assets/img/nmap.png">
+<img src="{{ site.baseurl }}/assets/img/nmap.png">

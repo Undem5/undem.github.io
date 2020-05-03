@@ -4,9 +4,9 @@ title: "VulnUniversity"
 date:   2020-05-03 16:57:51
 ---
 
-#Nmap - First step scanning the host
-<img src="{{ site.baseurl }}/assets/img/vulnuniversity/nmap.png">
+# Nmap - First step scanning the host
 
+<img src="{{ site.baseurl }}/assets/img/vulnuniversity/nmap.png">
 
 Then we will use dirsearch to search for web directories
 
@@ -15,6 +15,7 @@ Then we will use dirsearch to search for web directories
 We found a directory named "internal"
 This is a web page to upload file but we don't know the extension...
 
+<img src="{{ site.baseurl }}/assets/img/vulnuniversity/dirsearch.png">
 Let's use Burp Intruder
 
 # Burp Intruder - Test file extensions

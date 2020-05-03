@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>CybSec</title>
-  <id>http://localhost:8000</id>
-  <link href="http://localhost:8000" />
-  <link href="http://localhost:8000/atom.xml" rel="self" />
-  <updated>2020-05-03T16:12:38+00:00</updated>
+  <id>http://localhost:4000</id>
+  <link href="http://localhost:4000" />
+  <link href="http://localhost:4000/atom.xml" rel="self" />
+  <updated>2020-05-03T16:18:59+00:00</updated>
   <rights>Copyright 2014, Undem</rights>
   <author>
     <name>Undem</name>
@@ -12,7 +12,7 @@
   
     <entry>
       <title>Nmap</title>
-      <link href="http://localhost:8000/2014/01/27/nmap/" />
+      <link href="http://localhost:4000/2020/05/03/nmap/" />
       <summary type="html">&lt;h1 id=&quot;nmap&quot;&gt;Nmap&lt;/h1&gt;
 &lt;p&gt;Scanning target is the easiest part&lt;/p&gt;
 
@@ -66,8 +66,8 @@ You can combine nmap output with Metasploit. If you are using Metasploit, you ca
 &lt;p&gt;Here is an example
 &lt;img src=&quot;/undem.github.io/assets/img/vulnuniversity/nmap.png&quot; /&gt;&lt;/p&gt;
 </summary>
-      <id>http://localhost:8000/2014/01/27/nmap/</id>
-      <updated>2014-01-27T16:57:51+00:00</updated>
+      <id>http://localhost:4000/2020/05/03/nmap/</id>
+      <updated>2020-05-03T10:00:00+00:00</updated>
       <author>
         <name>Undem</name>
       </author>

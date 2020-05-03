@@ -74,4 +74,5 @@ Otherwise you can export in XML format
 {% endhighlight %}
 
 Here is an example
+![a nmap example](/assets/vulnuniversity/nmap.png)
 <img src="{{ base.url }}/assets/img/vulnuniversity/nmap.png">

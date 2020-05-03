@@ -4,25 +4,16 @@
   <id>http://localhost:8000</id>
   <link href="http://localhost:8000" />
   <link href="http://localhost:8000/atom.xml" rel="self" />
-  <updated>2020-05-03T10:03:46+00:00</updated>
-  <rights>Copyright 2014, John Doge</rights>
+  <updated>2020-05-03T16:12:38+00:00</updated>
+  <rights>Copyright 2014, Undem</rights>
   <author>
-    <name>John Doge</name>
+    <name>Undem</name>
   </author>
   
     <entry>
-      <title>VulUniversity</title>
-      <link href="http://localhost:8000/2014/01/27/vulnUniversity/" />
-      <summary type="html">&lt;p&gt;First step for this website under construction.&lt;/p&gt;
-
-&lt;p&gt;We will discover some basic tools such as&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Nmap&lt;/li&gt;
-  &lt;li&gt;Dirsearch&lt;/li&gt;
-  &lt;li&gt;Burp Intruder&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;nmap&quot;&gt;Nmap&lt;/h1&gt;
+      <title>Nmap</title>
+      <link href="http://localhost:8000/2014/01/27/nmap/" />
+      <summary type="html">&lt;h1 id=&quot;nmap&quot;&gt;Nmap&lt;/h1&gt;
 &lt;p&gt;Scanning target is the easiest part&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;nmap ipaddresss
@@ -73,12 +64,12 @@ You can combine nmap output with Metasploit. If you are using Metasploit, you ca
  &lt;span class=&quot;nt&quot;&gt;-oG&lt;/span&gt; : Gregable output&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Here is an example
-&lt;img src=&quot;/assets/img/vulnuniversity/nmap.png&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;/undem.github.io/assets/img/vulnuniversity/nmap.png&quot; /&gt;&lt;/p&gt;
 </summary>
-      <id>http://localhost:8000/2014/01/27/vulnUniversity/</id>
+      <id>http://localhost:8000/2014/01/27/nmap/</id>
       <updated>2014-01-27T16:57:51+00:00</updated>
       <author>
-        <name>John Doge</name>
+        <name>Undem</name>
       </author>
     </entry>
   

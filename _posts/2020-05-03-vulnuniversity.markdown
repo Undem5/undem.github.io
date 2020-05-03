@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "VulnUniversity"
-date:   2014-01-27 16:57:51
+date:   2020-05-03 16:57:51
 ---
 
 #Nmap - First step scanning the host
@@ -58,7 +58,8 @@ We save the service conf file in an environment variable.
 Systemctl has an interesting option:
 {% highlight bash %}
   systemctl link path_to_unit_file
-{% endhightlight %}
+{% endhighlight %}
+
 You can link a unit file which will create a link in /etc/systemd/system.
 You just need to enable it and start it. By combining the option 
 {% highlight bash %}

@@ -67,4 +67,4 @@ Otherwise you can export in XML format
 {% endhighlight %}
 
 Here is an example
-<img src="{{ site.baseurl }}/assets/img/nmap.png">
+<img src="{{ site.baseurl }}/assets/img/vulnuniversity/nmap.png">

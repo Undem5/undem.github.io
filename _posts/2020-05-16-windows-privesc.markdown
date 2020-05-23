@@ -70,5 +70,5 @@ And then you can execute your service:
 {% highlight bash %}
 sc start regsvc
 {% endhighlight %}
-<img src="{{ site.baseurl }}/assets/img/win_escpriv/services1.png">
-<img src="{{ site.baseurl }}/assets/img/win_escpriv/services2.png">
+<img src="{{ site.baseurl }}/assets/img/win_escpriv/service1.png">
+<img src="{{ site.baseurl }}/assets/img/win_escpriv/service2.png">

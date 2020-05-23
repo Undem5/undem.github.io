@@ -33,7 +33,7 @@ The target need to be logon as Administrator for the privilege access.
 # Windows - Always Installed Elevated
 One good way to know is the Installed Elevated feature is enable is to do:
 
-<img src="{{ site.baseurl }}/assets/img/win_privesc/alwaysinstalled.png">
+<img src="{{ site.baseurl }}/assets/img/win_escpriv/alwaysinstalled.png">
 {% highlight bash %}
 HKLM: H_KEY_Local_Machine
 HKCU: H_KEY_Current_User
@@ -70,5 +70,5 @@ And then you can execute your service:
 {% highlight bash %}
 sc start regsvc
 {% endhighlight %}
-<img src="{{ site.baseurl }}/assets/img/win_privesc/services1.png">
-<img src="{{ site.baseurl }}/assets/img/win_privesc/services2.png">
+<img src="{{ site.baseurl }}/assets/img/win_escpriv/services1.png">
+<img src="{{ site.baseurl }}/assets/img/win_escpriv/services2.png">

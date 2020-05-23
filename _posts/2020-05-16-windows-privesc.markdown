@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Windows PrivEsc"
-date:   2020-23-16 10:00:00
+date:   2020-05-23 10:00:00
 ---
 Here some of classic examples of windows priv esc (from Windows PrivEsc Arena/TCM)
 

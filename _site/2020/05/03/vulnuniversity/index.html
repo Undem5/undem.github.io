@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+      <title>CybSec - Fluid, responsive blog theme for Jekyll</title>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <meta http-equiv="content-language" content="en-gb" />
+      <meta name="description" content="Fluid, responsive blog theme for Jekyll">
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+      <link href="//fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700|Lora:400,700,400italic" rel="stylesheet" type="text/css">
+      <link rel="stylesheet" type="text/css" href="/undem.github.io/css/main.css" />
+      <link href="atom.xml" type="application/atom+xml" rel="alternate" title="Site ATOM Feed">
+  </head>
+
+  <body>
+    <!--[if lt IE 7]>
+        <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+
+    <div class="off-canvas">
+      <figure class="avatar">
+        <img src="/undem.github.io/assets/img/avatar.jpg" alt="Picture" title="That's me, Undem.">
+      </figure>
+      <div class="bio">
+          <h1>Hi, I'm Undem.</h1>
+          <p>Hello there</p>
+      </div>
+      <nav>
+        <h6>Follow me on</h6>
+        <ul>
+          
+          
+          <li><a target="_blank" href="https://github.com/undem5">Github</a></li>
+          
+          
+          
+        </ul>
+      </nav>
+    </div>
+
+
+    <div class="site-wrapper">
+
+      <header>
+        <div class="h-wrap">
+          <h1 class="title"><a href="/undem.github.io/" title="Back to Homepage">CybSec</a></h1>
+          <a class="menu-icon" title="Open Bio"><span class="lines"></span></a>
+        </div>
+      </header>
+
+      <main>
+        <section class="single-wrap">
+  <article class="single-content" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="feat">
+      <h5 class="page-date">
+        <time datetime="2020-05-03T16:57:51+00:00" itemprop="datePublished">
+          03 May 2020
+        </time>
+      </h5>
+    </div>
+    <h1 class="page-title" itemprop="name headline">VulnUniversity</h1>
+    <div itemprop="articleBody">
+      <h1 id="nmap---first-step-scanning-the-host">Nmap - First step scanning the host</h1>
+
+<p><img src="/undem.github.io/assets/img/vulnuniversity/nmap.png" /></p>
+
+<p>Then we will use dirsearch to search for web directories</p>
+
+<h1 id="dirsearch---web-path-scanner">Dirsearch - Web path scanner</h1>
+
+<p>We found a directory named “internal”
+This is a web page to upload file but we don’t know the extension…</p>
+
+<p><img src="/undem.github.io/assets/img/vulnuniversity/dirsearch.png" />
+Let’s use Burp Intruder</p>
+
+<h1 id="burp-intruder---test-file-extensions">Burp Intruder - Test file extensions</h1>
+<p>We choose simple list and we upload a common list of extensions
+On positions, we choose the attack type: Sniper.
+When we are on the web page, we launch the Intruder option:</p>
+
+<p><img src="/undem.github.io/assets/img/vulnuniversity/burp_proxy.png" />
+with the Forward button</p>
+
+<p>And we get:</p>
+
+<p><img src="/undem.github.io/assets/img/vulnuniversity/burp_intruder.png" />
+So we create a phtml reverse shell and we upload the file. At the same time, we use netcat
+to listen for the incoming connection:</p>
+
+<p><img src="/undem.github.io/assets/img/vulnuniversity/netcat.png" /></p>
+
+<h1 id="suid-permission">SUID permission</h1>
+
+<p>We search for Set-UID permission:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"> find / <span class="nt">-perm</span> /40000</code></pre></figure>
+
+<p>(Btw SGID is 2000 and so SGID+SUID=6000)</p>
+
+<p>We found the binary systemctl.
+The flag is at</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">  /root/flag.txt</code></pre></figure>
+
+<p>So we create a service which will display the content of the file.</p>
+
+<p>But we don’t have the permission to create a file in the systemd directory. How to do it? Environment variable:</p>
+
+<h1 id="systemctl-link-feature">Systemctl Link feature</h1>
+<p>We save the service conf file in an environment variable.
+Systemctl has an interesting option:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">  systemctl <span class="nb">link </span>path_to_unit_file</code></pre></figure>
+
+<p>You can link a unit file which will create a link in /etc/systemd/system.
+You just need to enable it and start it. By combining the option</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">  <span class="nb">enable</span> <span class="nt">--now</span>: When used with <span class="nb">enable</span>, the units will also be started</code></pre></figure>
+
+<p>And then we get the content of the file we want:</p>
+
+<p><img src="/undem.github.io/assets/img/vulnuniversity/systemctl.png" /></p>
+
+<p>Hoped you liked this article!</p>
+
+    </div>
+    <div class="feat share">
+      <a href="http://twitter.com/share" class="popup">
+        <span class="icon-twitter"></span>
+      </a>
+    </div>
+    
+      <a rel="next" href="/undem.github.io/2020/05/23/windows-privesc/" id="next">
+        <span class="nav-title nav-title-next">newer</span> &rarr;
+      </a>
+    
+    
+      <a rel="prev" href="/undem.github.io/2020/05/03/nmap/" id="prev">
+        &larr; <span class="nav-title nav-title-prev">older</span>
+      </a>
+    
+  </article>
+</section>
+
+      </main>
+
+      <footer>
+        <small>Powered by Jekyll - Theme: <a href="https://github.com/m3xm/hikari-for-Jekyll">hikari</a> - &copy; Undem</small>
+      </footer>
+
+    </div>
+    
+
+    <script src="/undem.github.io/js/main.js"></script>
+    
+    
+
+  </body>
+</html>

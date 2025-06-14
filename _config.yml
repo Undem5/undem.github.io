@@ -8,7 +8,7 @@ description: "Fluid, responsive blog theme for Jekyll"
 author: "Undem"
 
 url: "http://undem5.github.io"
-baseurl: ""
+baseurl: "/"
 
 #baseurl: "/undem.github.io"
 

@@ -15,4 +15,4 @@ You can perform custom XML search query to look for specific Event ID
 {% endhighlight %}
 
 Here is an example
-<img src="{{ site.baseurl }}/assets/img/winevent/search1.png">
+<img src="{{ site.baseurl }}/assets/img/winevent/search1.PNG">

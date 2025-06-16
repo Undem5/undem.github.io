@@ -16,3 +16,19 @@ You can perform custom XML search query to look for specific Event ID
 
 Here is an example
 <img src="{{ site.baseurl }}/assets/img/winevent/search1.PNG">
+
+# Filtering Windows Events with XML in PowerShell
+
+{% highlight powershell %}
+$xmlQuery = @'
+>> <QueryList>
+>>   <Query Id="0" Path="Security">
+>>     <Select Path="Security">
+>>       *[System[(EventID=4624) and (EventRecordID=2677922)]]
+>>     </Select>
+>>   </Query>
+>> </QueryList>
+>> '@
+
+Get-WinEvent -FilterXml $xmlQuery | Format-List *
+{% endhighlight %}

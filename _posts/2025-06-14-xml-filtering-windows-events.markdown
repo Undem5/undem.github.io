@@ -32,3 +32,26 @@ $xmlQuery = @'
 
 Get-WinEvent -FilterXml $xmlQuery | Format-List *
 {% endhighlight %}
+
+And to put it in syslog format so better analysis
+
+{% highlight powershell %}
+$eventLogs = Get-WinEvent -FilterXml $xmlQuery | Select-Object *
+
+foreach ($event in $eventLogs) {
+>>     $syslogFormat = @"
+>> {
+>>   "timestamp": "$($event.TimeCreated.ToString("yyyy-MM-ddTHH-mm-ss.fffZ") -replace "`r`n", "\r\n\r\n")",
+>>   "event_id": "$($event.Id -replace "`r`n", "\r\n\r\n")",
+>>   "provider": "$($event.ProviderName -replace "`r\n", "\r\n\r\n")",
+>>   "record_id": "$($event.RecordId -replace "\s+", "\r\n\r\n")",
+>>   "message": "$($event.Message -replace "`r`n", "\r\n\r\n")"
+>> }
+>> "@
+>>     Write-Output $syslogFormat
+>> }
+>>
+
+{% endhighlight %}
+
+Here is an output example:
